@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_arc_application/features/auth/presentation/pages/signup_page.dart';
+import 'package:flutter_clean_arc_application/core/theme/theme.dart';
+import 'package:flutter_clean_arc_application/features/auth/presentation/pages/sign_up_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,11 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+       theme: AppTheme.darkThemeMode,
       home: const SignUpPage(),
     );
   }

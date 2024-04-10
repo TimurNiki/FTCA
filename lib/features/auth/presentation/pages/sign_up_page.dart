@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_application/features/auth/presentation/pages/login_page.dart';
-import '../../../../core/theme/app_pallete.dart';
+import '../../../../core/theme/app_palette.dart';
 import '../widgets/index.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -79,7 +79,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         text: "Sign In",
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.bold,
-                              color: AppPallete.gradient2,
+                              color: AppPalette.gradient2,
                             ),
                       )
                     ],

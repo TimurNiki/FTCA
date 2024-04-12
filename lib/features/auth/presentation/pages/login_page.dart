@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_application/features/auth/presentation/pages/sign_up_page.dart';
-
 import '../../../../core/theme/app_palette.dart';
 import '../widgets/index.dart';
 
@@ -79,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: AppPalette.gradient2,
                                 ),
                       )
+                      
                     ],
                   ),
                 ),

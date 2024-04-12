@@ -68,7 +68,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  // explain: 
+  // explain:
   Future<UserModel?> getCurrentUserData() async {
     try {
       if (currentUserSession != null) {

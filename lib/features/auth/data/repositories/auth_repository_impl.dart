@@ -11,15 +11,17 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.authRemoteDataSource);
   @override
   Future<Either<Failure, User>> signIn(
-      {required String email, required String password}) async{
-  try {
+      {required String email, required String password}) async {
+    try {
       final userId = await authRemoteDataSource.signIn(
-          email: email, password: password,);
+        email: email,
+        password: password,
+      );
       return right(userId);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
-      }
+  }
 
   @override
   Future<Either<Failure, User>> signUp(
@@ -34,11 +36,10 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(Failure(e.message));
     }
   }
-  
+
   @override
   Future<Either<Failure, User>> currentUser() {
     // TODO: implement currentUser
     throw UnimplementedError();
   }
 }
-

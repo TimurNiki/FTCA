@@ -25,5 +25,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 }
 
-void _userSignUp() {}
+void _onSignUp(AuthIsUserLoggedIn event, Emitter<AuthState> emit)async {
+final res = await _userSignUp(
+
+);
+}
 void _userLogin() {}
+void _currentUser(){}

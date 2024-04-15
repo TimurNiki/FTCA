@@ -1,7 +1,6 @@
 import 'package:flutter_clean_arc_application/core/usecase/usecase.dart';
 import 'package:flutter_clean_arc_application/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
-
 import '../../../../core/common/entities/user.dart';
 import '../../../../core/errors/failure.dart';
 

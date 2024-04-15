@@ -1,5 +1,4 @@
 import 'package:fpdart/fpdart.dart';
-
 import '../../../../core/common/entities/user.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/usecase/usecase.dart';

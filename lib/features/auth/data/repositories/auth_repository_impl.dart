@@ -5,22 +5,24 @@ import 'package:flutter_clean_arc_application/features/auth/data/datasources/aut
 import 'package:flutter_clean_arc_application/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../../core/constants/constants.dart';
+import '../../../../core/network/connection_checker.dart';
+import '../models/user_model.dart';
+
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
+  final ConnectionChecker connectionChecker;
 
-  AuthRepositoryImpl(this.authRemoteDataSource);
+  AuthRepositoryImpl(this.authRemoteDataSource, this.connectionChecker);
   @override
   Future<Either<Failure, User>> signIn(
       {required String email, required String password}) async {
-    try {
-      final userId = await authRemoteDataSource.signIn(
+    return _getUser(
+      () async => await authRemoteDataSource.signIn(
         email: email,
         password: password,
-      );
-      return right(userId);
-    } on ServerException catch (e) {
-      return left(Failure(e.message));
-    }
+      ),
+    );
   }
 
   @override
@@ -28,18 +30,49 @@ class AuthRepositoryImpl implements AuthRepository {
       {required String email,
       required String password,
       required String name}) async {
+    return _getUser(() async => await authRemoteDataSource.signUp(
+        email: email, password: password, name: name));
+  }
+
+  @override
+  Future<Either<Failure, User>> currentUser() async {
     try {
-      final userId = await authRemoteDataSource.signUp(
-          email: email, password: password, name: name);
-      return right(userId);
+      if (!await (connectionChecker.isConnected)) {
+        final session = authRemoteDataSource.currentUserSession;
+
+        if (session == null) {
+          return left(Failure('User not logged in!'));
+        }
+        return right(
+          UserModel(
+            id: session.user.id,
+            email: session.user.email ?? '',
+            name: '',
+          ),
+        );
+      }
+      final user = await authRemoteDataSource.getCurrentUserData();
+      if (user == null) {
+        return left(Failure('User not logged in!'));
+      }
+
+      return right(user);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }
   }
 
-  @override
-  Future<Either<Failure, User>> currentUser() {
-    // TODO: implement currentUser
-    throw UnimplementedError();
+  Future<Either<Failure, User>> _getUser(
+    Future<User> Function() fn,
+  ) async {
+    try {
+      if (!await (connectionChecker.isConnected)) {
+        return left(Failure(Constants.noConnection));
+      }
+      final user = await fn();
+      return right(user);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
   }
 }

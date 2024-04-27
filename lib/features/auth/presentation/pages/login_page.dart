@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_arc_application/features/auth/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:flutter_clean_arc_application/features/auth/presentation/pages/sign_up_page.dart';
-import 'package:flutter_clean_arc_application/features/blog/presentation/pages/bloc_page.dart';
+import 'package:flutter_clean_arc_application/features/blog/presentation/pages/blog_page.dart';
 import '../../../../core/common/widgets/loader.dart';
 import '../../../../core/theme/app_palette.dart';
 import '../../../../core/utils/show_snackbar.dart';

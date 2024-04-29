@@ -1,8 +1,10 @@
+import 'dart:io';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_application/core/theme/app_palette.dart';
-
 import '../../../../core/constants/constants.dart';
+import '../widgets/blog_editor.dart';
 
 class AddNewBlogPage extends StatefulWidget {
   const AddNewBlogPage({super.key});
@@ -69,7 +71,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                     children: Constants.topics
                         .map(
                           (e) => Padding(
-                            padding: EdgeInsets.all(5.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: GestureDetector(
                               onTap: () {
                                 selectedTopics.contains(e)
@@ -77,6 +79,19 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                                     : selectedTopics.add(e);
                                 setState(() {});
                               },
+                              child: Chip(
+                                label: Text(e),
+                                color: selectedTopics.contains(e)
+                                    ? const MaterialStatePropertyAll(
+                                        AppPalette.gradient1,
+                                      )
+                                    : null,
+                                side: selectedTopics.contains(e)
+                                    ? null
+                                    : const BorderSide(
+                                        color: AppPalette.borderColor,
+                                      ),
+                              ),
                             ),
                           ),
                         )
@@ -84,16 +99,15 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                    BlogEditor(
-                      controller: titleController,
-                      hintText: 'Blog title',
-                    ),
-                    const SizedBox(height: 10),
-                    BlogEditor(
-                      controller: contentController,
-                      hintText: 'Blog content',
-                    ),
-
+                BlogEditor(
+                  controller: titleController,
+                  hintText: 'Blog title',
+                ),
+                const SizedBox(height: 10),
+                BlogEditor(
+                  controller: contentController,
+                  hintText: 'Blog content',
+                ),
               ],
             ),
           ),

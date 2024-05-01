@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_arc_application/core/theme/app_palette.dart';
 import '../../../../core/constants/constants.dart';
+import '../../../../core/utils/pick_image.dart';
 import '../widgets/blog_editor.dart';
 
 class AddNewBlogPage extends StatefulWidget {
@@ -20,7 +21,23 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
   List<String> selectedTopics = [];
   File? image;
 
+  void selectImage() async {
+    final pickedImage = await pickImage();
+    if (pickedImage != null) {
+      setState(() {
+        image = pickedImage;
+      });
+    }
+  }
+
   void uploadBlog() {}
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    contentController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +53,29 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
+            key: formKey,
             child: Column(
               children: [
+                image != null
+                    ? GestureDetector(
+                        onTap: selectImage,
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 150,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              image!,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          selectImage();
+                        },
+                      ),
                 DottedBorder(
                   color: AppPalette.borderColor,
                   dashPattern: const [10, 4],

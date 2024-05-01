@@ -44,6 +44,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
       appBar: AppBar(
         actions: [
           IconButton(
+            
             onPressed: uploadBlog,
             icon: const Icon(Icons.done_rounded),
           )

@@ -2,14 +2,15 @@ import 'package:hive/hive.dart';
 
 import '../models/blog_model.dart';
 
-abstract interface class LocalRemoteDataSource {
+abstract interface class BlogLocalDataSource {
   void uploadLocalBlogs({required List<BlogModel> blogs});
+  List<BlogModel> loadBlogs();
 }
 
-class LocalRemoteDataSourceImpl implements LocalRemoteDataSource {
+class BlogLocalRemoteDataSourceImpl implements BlogLocalDataSource {
   final Box box;
 
-  LocalRemoteDataSourceImpl(this.box);
+  BlogLocalRemoteDataSourceImpl(this.box);
 
   List<BlogModel> loadBlogs() {
     List<BlogModel> blogs = [];

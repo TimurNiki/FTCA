@@ -4,7 +4,7 @@ import '../../../../core/errors/exception.dart';
 import '../models/blog_model.dart';
 
 abstract interface class BlogRemoteDataSource {
-  Future<BlogModel> updateBlog(BlogModel blog);
+  Future<BlogModel> uploadBlog(BlogModel blog);
   Future<String> uploadBlogImage({
     required File image,
     required BlogModel blog,
@@ -33,7 +33,7 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
   }
 
   @override
-  Future<BlogModel> updateBlog(BlogModel blog) async {
+  Future<BlogModel> uploadBlog(BlogModel blog) async {
     try {
       final blogData =
           await supabaseClient.from("blogs").insert(blog.toJson()).select();

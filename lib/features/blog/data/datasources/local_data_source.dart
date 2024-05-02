@@ -12,6 +12,7 @@ class BlogLocalRemoteDataSourceImpl implements BlogLocalDataSource {
 
   BlogLocalRemoteDataSourceImpl(this.box);
 
+@override
   List<BlogModel> loadBlogs() {
     List<BlogModel> blogs = [];
     box.read(() {

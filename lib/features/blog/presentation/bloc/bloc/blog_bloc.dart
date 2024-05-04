@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-
 import '../../../../../core/usecase/usecase.dart';
 import '../../../domain/entities/blog.dart';
 import '../../../domain/usecases/get_all_blogs.dart';

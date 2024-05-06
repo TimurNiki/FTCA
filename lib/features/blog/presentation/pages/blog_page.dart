@@ -1,5 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/common/widgets/loader.dart';
+import '../../../../core/theme/app_palette.dart';
+import '../../../../core/utils/show_snackbar.dart';
+import '../bloc/bloc/blog_bloc.dart';
+import '../widgets/blog_card.dart';
 
 class BlogPage extends StatefulWidget {
   const BlogPage({super.key});
@@ -23,10 +29,31 @@ class _BlogPageState extends State<BlogPage> {
           )
         ],
       ),
-      body: ListView.builder(
-        itemCount: state.blogs.length,
-        itemBuilder: (context, index) {
-          return;
+      body: BlocConsumer<BlogBloc, BlogState>(
+        listener: (context, state) {
+          if (state is BlogFailure) {
+            showSnackBar(context, state.error);
+          }
+        },
+        builder: (context, state) {
+          if (state is BlogLoading) {
+            return const Loader();
+          }
+          if (state is BlogsDisplaySuccess) {
+            return ListView.builder(
+              itemCount: state.blogs.length,
+              itemBuilder: (context, index) {
+                final blog = state.blogs[index];
+                return BlogCard(
+                  blog: blog,
+                  color: index % 2 == 0
+                      ? AppPalette.gradient1
+                      : AppPalette.gradient2,
+                );
+              },
+            );
+          }
+          return const SizedBox();
         },
       ),
     );

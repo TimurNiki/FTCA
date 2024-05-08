@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_clean_arc_application/core/theme/theme.dart';
-import 'package:flutter_clean_arc_application/features/auth/presentation/bloc/bloc/auth_bloc.dart';
-import 'package:flutter_clean_arc_application/features/auth/presentation/pages/login_page.dart';
-import 'core/common/cubits/app_user_cubit.dart';
-import 'core/init/init_dependencies.dart';
-import 'features/blog/presentation/pages/blog_page.dart';
+import 'blog_app/core/common/cubits/app_user_cubit.dart';
+import 'blog_app/core/init/init_dependencies.dart';
+import 'blog_app/core/theme/theme.dart';
+import 'blog_app/features/auth/presentation/bloc/bloc/auth_bloc.dart';
+import 'blog_app/features/auth/presentation/pages/login_page.dart';
+import 'blog_app/features/blog/presentation/pages/blog_page.dart';
 
 void main() async {
   await initDependencies();

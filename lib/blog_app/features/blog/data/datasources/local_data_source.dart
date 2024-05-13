@@ -7,10 +7,10 @@ abstract interface class BlogLocalDataSource {
   List<BlogModel> loadBlogs();
 }
 
-class BlogLocalRemoteDataSourceImpl implements BlogLocalDataSource {
+class BlogLocalDataSourceImpl implements BlogLocalDataSource {
   final Box box;
 
-  BlogLocalRemoteDataSourceImpl(this.box);
+  BlogLocalDataSourceImpl(this.box);
 
 @override
   List<BlogModel> loadBlogs() {

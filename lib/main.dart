@@ -5,18 +5,27 @@ import 'blog_app/core/init/init_dependencies.dart';
 import 'blog_app/core/theme/theme.dart';
 import 'blog_app/features/auth/presentation/bloc/bloc/auth_bloc.dart';
 import 'blog_app/features/auth/presentation/pages/login_page.dart';
+import 'blog_app/features/blog/presentation/bloc/bloc/blog_bloc.dart';
 import 'blog_app/features/blog/presentation/pages/blog_page.dart';
 
 void main() async {
   await initDependencies();
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider(
-      create: (_) => serviceLocator<AuthBloc>(),
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => serviceLocator<AuthBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<AppUserCubit>(),
+        ),
+        BlocProvider(
+          create: (_) => serviceLocator<BlogBloc>(),
+        ),
+      ],
+      child: const MyApp(),
     ),
-    BlocProvider(
-      create: (_) => serviceLocator<AppUserCubit>(),
-    )
-  ], child: const MyApp()));
+  );
 }
 
 class MyApp extends StatefulWidget {

@@ -1,1 +1,1 @@
-
+Different apps with CleanArc.
